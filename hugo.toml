@@ -1,0 +1,95 @@
+baseURL = '/'
+copyright = "Pedro Garcia"
+disableReadOtherPosts = false
+keywords = "homepage, blog, devops"
+languageCode = "en-us"
+rssLimit     = 10
+theme = "hello-friend-ng"
+
+archetypeDir = "archetypes"
+contentDir   = "content"
+dataDir      = "data"
+layoutDir    = "layouts"
+publishDir   = "public"
+
+PygmentsCodeFences = true
+PygmentsStyle = "monokai"
+
+
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = 'page'
+
+[params]
+  dateform        = "2 Enero, 2006"
+  dateformShort   = "2 Enero"
+  dateformNum     = "01-01-2006"
+  dateformNumTime = "01-01-2006 15:04 +0100"
+
+  description = "Pedro Garcia Rodriguez Homepage"
+  homeSubtitle = 'Father x3. Husband. Cloud engineer. Dog Lover. Nachos with guacamole connoisseur. Full-time frustrated guitar player.'
+  images = [""]
+  justifyContent = true
+  keywords = "Pedro Garcia"
+
+  [[params.authors]]
+     email = 'p.garcia.rodriguez@proton.me'
+     name = '"Pedro Garcia Rodriguez'
+
+  [params.favicon.color]
+    mask = "#252627"
+    msapplication = "#252627"
+    theme = "#252627"
+
+  [params.logo]
+    logoText     = " pgarcia.es"
+    logoHomeLink = "/"
+
+  [[params.social]]
+     name = "email"
+     url  = "mailto:p.garcia.rodriguez@proton.me"
+
+  [[params.social]]
+     name = "github"
+     url  = "https://github.com/breakingpitt"
+
+  [[params.social]]
+     name = "linkedin"
+     url  = "https://www.linkedin.com/in/pedrogarciarodriguez"
+
+[permalinks]
+  posts = "/posts/:year/:month/:title/"
+
+[taxonomies]
+    category = 'blog'
+    tag      = 'tags'
+    series   = 'series'
+
+[languages]
+  [languages.en]
+    baseURL = '/'
+    title = 'Pedro Garcia Rodriguez'
+    languageName = 'English'
+    weight = 1
+
+  [languages.en.params]
+    languageCode = "en-US"
+    locale = "en-US"
+    ISO8601 = "2025-02-03T09:51:00+01:00"
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+
+  [[menu.main]]
+    identifier = "posts"
+    name = "Blog"
+    url = "posts/"
+
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "about/"
