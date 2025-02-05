@@ -150,7 +150,7 @@ The .dockerignore file allows you to define patterns for the files and directori
 
 A typical .dockerignore file might look like this:
 
-```
+```.ignore
 # Ignore version control directories
 .git
 .svn
