@@ -1,4 +1,4 @@
-baseURL = '/'
+baseURL = 'http://www.pgarcia.es'
 copyright = "Pedro Garcia"
 disableReadOtherPosts = false
 keywords = "homepage, blog, devops"
@@ -43,12 +43,12 @@ PygmentsStyle = "monokai"
     theme = "#252627"
 
   [params.logo]
-    logoText     = " pgarcia.es"
+    logoText     = "pgarcia.es"
     logoHomeLink = "/"
 
   [[params.social]]
      name = "email"
-     url  = "mailto:p.garcia.rodriguez@proton.me"
+     url  = "mailto:me@pgarcia.es"
 
   [[params.social]]
      name = "github"
@@ -68,7 +68,7 @@ PygmentsStyle = "monokai"
 
 [languages]
   [languages.en]
-    baseURL = '/'
+    baseURL = 'http://www.pgarcia.es'
     title = 'Pedro Garcia Rodriguez'
     languageName = 'English'
     weight = 1
