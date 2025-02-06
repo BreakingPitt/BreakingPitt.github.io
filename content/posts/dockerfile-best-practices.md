@@ -82,13 +82,13 @@ Docker Images are lightweight, standalone, and executable packages that encompas
 - __System Tools -__ Essential system utilities and tools.
 - __System Settings -__ Configuration files and environmental variables.
 
-### **Dockerfile** best practices
+## **Dockerfile** best practices
 
 The performance of a Docker container is directly influenced by the sequence of steps outlined in your **Dockerfile**. Adopting best practices is essential to ensure that your final Docker image is both efficient and optimized, with minimal resource consumption during the build and runtime.
 
 To help you achieve optimal performance, let's explore some key guidelines and best practices for writing effective **Dockerfile**s:
 
-#### Use Multi-Stage builds for smaller and more efficient images
+### Use Multi-Stage builds for smaller and more efficient images
 
 One of the most effective ways to reduce the size of your Docker images is by using multi-stage builds. Multi-stage builds allow you to separate the build process from the final image, ensuring that only the necessary artifacts are included in the final container, while discarding any non-essential files, dependencies, or build tools. This practice is invaluable for optimizing image size, improving security, and reducing the surface area for potential vulnerabilities.
 
@@ -143,7 +143,7 @@ In the final stage, the **Dockerfile** again starts with the same minimal Python
 
 Only the application code and installed dependencies are included in this final image, keeping it lean and free from any build tools or unnecessary files.
 
-#### Exclude irrelevant files with .dockerignore
+### Exclude irrelevant files with .dockerignore
 
 To optimize your Docker build process and ensure that unnecessary files are not included in your Docker image, you should leverage a .dockerignore file. This file works similarly to a .gitignore file, allowing you to specify which files and directories should be excluded from the build context when Docker creates an image.
 
