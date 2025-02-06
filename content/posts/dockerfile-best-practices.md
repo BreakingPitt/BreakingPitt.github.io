@@ -199,8 +199,8 @@ In the following example,each ```RUN``` command create a layer in the image maki
 
 ```dockerfile
 
-# Use a base Ubuntu image
-FROM ubuntu:20.04
+# Use an official Python runtime as the base image
+FROM python:3.14-slim
 
 # Update the system
 RUN apt-get update
@@ -238,10 +238,10 @@ CMD ["python3", "app.py"]
 To optimize the size of your Docker image, it’s a best practice to concatenate multiple ```RUN``` commands into a single statement making the **Dockerfile** more efficient but also improving readability
 
 ```dockerfile
-# Use a base Ubuntu image
-FROM ubuntu:20.04
+# Use an official Python runtime as the base image
+FROM python:3.14-slim
 
-# Update the system, install Python3, pip, clean cache, and remove unnecessary files in a single RUN command
+# Update the system, install Python3, pip, clean cache, and remove unnecessary files
 RUN apt-get update && apt-get install -y python3 python3-pip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -259,4 +259,4 @@ EXPOSE 8000
 
 # Default command to run when the container starts
 CMD ["python3", "app.py"]
-```.
+```
