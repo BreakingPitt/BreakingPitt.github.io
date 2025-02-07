@@ -16,3 +16,7 @@ In my free time, I’m passionate about sharing my knowledge with others. I acti
 
 Outside of work, I enjoy playing the guitar and spending time with my family, including my wife and my daughters in Móstoles. I’m an avid sports fan, especially when it comes to Formula 1, NBA, NFL, and NHL. I also train and play basketball in the small forward position, always striving to improve my skills, both on and off the court.
 
+
+How to contact me
+
+Feel free to email me at me AT pgarcia DOT es or at some of the several social websites linked in the bottom of this page.
