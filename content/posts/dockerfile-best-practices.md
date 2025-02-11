@@ -23,18 +23,6 @@ This article will dive into the best practices for writing **Dockerfiles**, offe
 
 ## **Dockerfile** Best Practices
 
-### Docker images
-
-Docker Images are lightweight, standalone, and executable packages that encompass everything needed to run a piece of software. They are an integral part of the Docker ecosystem and play a crucial role in containerization. These images include:
-
-- __Code -__ The application code itself.
-- __Runtime -__ The execution environment required by the application.
-- __Libraries -__ All necessary libraries and dependencies.
-- __System Tools -__ Essential system utilities and tools.
-- __System Settings -__ Configuration files and environmental variables.
-
-## **Dockerfile** best practices
-
 The performance of a Docker container is directly influenced by the sequence of steps outlined in your **Dockerfile**. Adopting best practices is essential to ensure that your final Docker image is both efficient and optimized, with minimal resource consumption during the build and runtime.
 
 To help you achieve optimal performance, let's explore some key guidelines and best practices for writing effective **Dockerfiles**:
