@@ -27,7 +27,59 @@ The performance of a Docker container is directly influenced by the sequence of 
 
 To help you achieve optimal performance, let's explore some key guidelines and best practices for writing effective **Dockerfiles**:
 
-### Use Multi-Stage builds for smaller and more efficient images
+### 1.- Use official Docker images whenever possible
+
+When building **Docker** containers, it might seem tempting to start from scratch or rely on community-contributed images. However, using official **Docker** images from trusted sources like **Docker Hub** or official repositories provides several advantages, including security, reliability, and ongoing maintenance.
+
+These official images are curated and maintained by the software vendors or trusted communities, ensuring they meet best practices, are regularly updated, and are tested for compatibility. By starting with an official base image, you ensure that your containerized application is built on a solid, secure, and stable foundation.
+
+Official **Docker** images are pre-configured with the necessary dependencies, settings, and environment variables, which helps you avoid common pitfalls and reduces the chances of misconfigurations. They also follow security guidelines to ensure the containers are secure by default, with regular updates and patches for critical vulnerabilities.
+
+These official images can also save significant time during the build process because these images are optimized to work efficiently, providing a head start when compared to custom or third-party images that may require manual updates or configuration tweaks.
+
+### 2.- Exclude irrelevant files with .dockerignore
+
+To optimize your Docker build process and ensure that unnecessary files are not included in your **Docker** image, you should leverage a .dockerignore file. This file works similarly to a .gitignore file, allowing you to specify which files and directories should be excluded from the build context when Docker creates an image.
+
+The .dockerignore file allows you to define patterns for the files and directories to exclude. Common examples of files to ignore include:
+
+- __Version control files -__ .git/, .svn/, or any other version control directories.
+- __Build and temporary files -__ *.log, *.tmp, or any folders related to development builds.
+- __IDE and editor configurations -__ .vscode/, .idea/, or other IDE-specific files that are not necessary for production.
+- __Operating system files -__ .DS_Store, Thumbs.db, or any OS-specific files that don't need to be in the container.
+
+A typical .dockerignore file might look like this:
+
+```gitignore
+# Ignore version control directories
+.git
+.svn
+
+# Ignore Python cache files
+__pycache__
+*.pyc
+
+# Ignore node_modules and other dependencies
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore IDE or editor-specific files
+.vscode/
+.idea/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+```
+
+By excluding unnecessary files from the **Docker** build context, you make the **Docker** image leaner and more efficient. This also prevents sensitive or private data, such as credentials or local configuration files, from being exposed in the container.
+
+Additionally, excluding large directories (like node_modules/ or build artifacts) can significantly reduce the time it takes to build the image, as **Docker** won’t need to process or upload those files.
+
+### 3.- Use Multi-Stage builds for smaller and more efficient images
 
 One of the most effective ways to reduce the size of your Docker images is by using multi-stage builds. Multi-stage builds allow you to separate the build process from the final image, ensuring that only the necessary artifacts are included in the final container, while discarding any non-essential files, dependencies, or build tools. This practice is invaluable for optimizing image size, improving security, and reducing the surface area for potential vulnerabilities.
 
@@ -86,59 +138,7 @@ In the final stage, the **Dockerfile** again starts with the same minimal Python
 
 Only the application code and installed dependencies are included in this final image, keeping it lean and free from any build tools or unnecessary files.
 
-### Exclude irrelevant files with .dockerignore
-
-To optimize your Docker build process and ensure that unnecessary files are not included in your **Docker** image, you should leverage a .dockerignore file. This file works similarly to a .gitignore file, allowing you to specify which files and directories should be excluded from the build context when Docker creates an image.
-
-The .dockerignore file allows you to define patterns for the files and directories to exclude. Common examples of files to ignore include:
-
-- __Version control files -__ .git/, .svn/, or any other version control directories.
-- __Build and temporary files -__ *.log, *.tmp, or any folders related to development builds.
-- __IDE and editor configurations -__ .vscode/, .idea/, or other IDE-specific files that are not necessary for production.
-- __Operating system files -__ .DS_Store, Thumbs.db, or any OS-specific files that don't need to be in the container.
-
-
-A typical .dockerignore file might look like this:
-
-```gitignore
-# Ignore version control directories
-.git
-.svn
-
-# Ignore Python cache files
-__pycache__
-*.pyc
-
-# Ignore node_modules and other dependencies
-node_modules/
-
-# Ignore log files
-*.log
-
-# Ignore IDE or editor-specific files
-.vscode/
-.idea/
-
-# Ignore OS-specific files
-.DS_Store
-Thumbs.db
-
-```
-By excluding unnecessary files from the **Docker** build context, you make the **Docker** image leaner and more efficient. This also prevents sensitive or private data, such as credentials or local configuration files, from being exposed in the container. 
-
-Additionally, excluding large directories (like node_modules/ or build artifacts) can significantly reduce the time it takes to build the image, as **Docker** won’t need to process or upload those files.
-
-### Use official Docker images whenever possible
-
-When building **Docker** containers, it might seem tempting to start from scratch or rely on community-contributed images. However, using official **Docker** images from trusted sources like **Docker Hub** or official repositories provides several advantages, including security, reliability, and ongoing maintenance. 
-
-These official images are curated and maintained by the software vendors or trusted communities, ensuring they meet best practices, are regularly updated, and are tested for compatibility. By starting with an official base image, you ensure that your containerized application is built on a solid, secure, and stable foundation.
-
-Official **Docker** images are pre-configured with the necessary dependencies, settings, and environment variables, which helps you avoid common pitfalls and reduces the chances of misconfigurations. They also follow security guidelines to ensure the containers are secure by default, with regular updates and patches for critical vulnerabilities.
-
-These official images can also save significant time during the build process because these images are optimized to work efficiently, providing a head start when compared to custom or third-party images that may require manual updates or configuration tweaks.
-
-### Concatenate RUN Commands for more efficient Dockerfiles
+### 4.- Concatenate RUN Commands for more efficient Dockerfiles
 
 When building **Docker** images, every ```RUN``` command in the **Dockerfile** results in a new layer being created. This is an important concept because each layer not only consumes storage but also adds time to the image build process. 
 
