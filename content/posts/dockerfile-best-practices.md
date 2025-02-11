@@ -9,8 +9,6 @@ title = 'Dockerfile Best Practices'
 
 In the dynamic and ever-evolving world of containerization, **Dockerfiles** are the cornerstone for building efficient and scalable Docker images. Writing these files involves understanding best practices to ensure optimal performance and simplified long-term maintenance.
 
-This article explores essential **Dockerfile** best practices, providing insights, examples, and practical tips to elevate your containerization experience.
-
 When writing **Dockerfiles**, one of the primary concerns is ensuring that they are secure and free of vulnerabilities. The produced image should not contain unnecessary dependencies or configurations that could make it easier for attackers to exploit. 
 
 Another crucial aspect of writing effective **Dockerfiles** is optimizing the image size, a smaller image is not only faster to download and deploy but also minimizes the attack surface by reducing the number of components that could be vulnerable. 
@@ -21,6 +19,7 @@ Keeping the image as lean as possible also ensures that it can be stored remotel
 
 This involves structuring the **Dockerfile** in a logical and readable way, adding comments where necessary to explain the purpose of commands, and following established conventions for consistency. 
 
+This article explores essential **Dockerfile** best practices, providing insights, examples, and practical tips to elevate your containerization experience.
 
 ## **Dockerfile** Best Practices
 
