@@ -21,7 +21,7 @@ Structuring **Dockerfile** logically, adding comments where necessary, and follo
 
 This article will dive into the best practices for writing **Dockerfiles**, offering insights and practical tips to enhance your containerization workflow.
 
-## **Dockerfile** Best Practices
+## Dockerfile Best Practices
 
 The performance of a Docker container is directly influenced by the sequence of steps outlined in your **Dockerfile**. Adopting best practices is essential to ensure that your final Docker image is both efficient and optimized, with minimal resource consumption during the build and runtime.
 
