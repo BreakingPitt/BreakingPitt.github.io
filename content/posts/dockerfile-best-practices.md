@@ -1,8 +1,8 @@
 +++
 date = '2025-01-29T18:55:48+01:00'
 draft = false
-tags = ['Docker', '**Dockerfile**', 'Best Practices']
-title = '**Dockerfile** Best Practices'
+tags = ['Docker', 'Dockerfile', 'Best Practices']
+title = 'Dockerfile Best Practices'
 +++
 
 # Overview
