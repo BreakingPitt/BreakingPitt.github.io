@@ -23,56 +23,6 @@ This article will dive into the best practices for writing **Dockerfiles**, offe
 
 ## **Dockerfile** Best Practices
 
-### **Dockerfile**
-
-A **Dockerfile** is a text file containing a set of instructions to build a **Docker** image. It acts as a blueprint, telling **Docker** how to configure and prepare an environment inside a container.
-
-Each line in the **Dockerfile** represents an instruction, such as installing dependencies, copying files, exposing ports, and running commands. When you run the ```docker build``` command **Docker** uses these instructions to create an image. 
-
-This image is an executable package that contains everything needed to run an application, including the operating system, dependencies, system tools, environment variables, and the application code itself.
-
-Here's a simple example of a **Dockerfile** for a Python application:
-
-```dockerfile
-# Use an official Python runtime as the base image
-FROM python:3.14-slim
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
-# Define environment variable
-ENV NAME World
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
-
-```
-
-Let's break down this **Dockerfile**:
-
-- __FROM python:3.14-slim -__ Specifies the base image to use. In this case, it's an official Python image based on version 13.
-- __WORKDIR /app -__ This command defines your working directory inside the container to /app.
-- __COPY . /app -__ Copies the contents of the current directory on your host machine into the /app directory in the container.
-- __RUN pip install --no-cache-dir -r requirements.txt -__ Installs the dependencies listed in requirements.txt.
-- __EXPOSE 80 -__ Exposes port 80 for the container.
-- __ENV NAME World -__ Sets an environment variable named NAME with the value World.
-- __CMD ["python", "app.py"] -__ Specifies the command to run when the container starts, in this case, running app.py with Python.
-
-This is a basic example of a Python application, but **Dockerfiles** can be customized for various types of applications and services allowing you to define your application's environment, dependencies, and runtime configuration within a container. 
-
-For a Python application typically includes steps like setting up the Python environment, installing necessary libraries, and specifying the application’s entry point.
-
-Once you have your **Dockerfile**, you can generate a Docker image by running the ```docker build``` command, after building the image, you can use the ```docker run``` command  to launch containers based on that image, ensuring that the Python application runs consistently across different environments.
-
 ### Docker images
 
 Docker Images are lightweight, standalone, and executable packages that encompass everything needed to run a piece of software. They are an integral part of the Docker ecosystem and play a crucial role in containerization. These images include:
