@@ -37,7 +37,15 @@ Official **Docker** images are pre-configured with the necessary dependencies, s
 
 These official images can also save significant time during the build process because these images are optimized to work efficiently, providing a head start when compared to custom or third-party images that may require manual updates or configuration tweaks.
 
-### 2.- Exclude irrelevant files with .dockerignore
+### 2.- Use specific Docker image versions
+
+When writing Dockerfiles is to always use specific Docker image versions. While it might seem convenient to reference the latest version of an image (e.g.,```node:latest``` or ```python:latest```), this approach can lead to unpredictable builds and potential security risks.
+
+By specifying an exact image version (e.g., node:16.14.0), you ensure that your Docker image will be built the same way every time. This eliminates the possibility of different versions being pulled in development, staging, and production environments, which could lead to unexpected behavior or compatibility issues.
+
+Docker images frequently receive updates, which may introduce new features or changes that could break your application, by locking your Docker image to a specific version, you protect your build from any breaking changes introduced in newer versions of the image, ensuring that your application remains stable over time without the risk of unexpected updates disrupting your workflow.
+
+### 3.- Exclude irrelevant files with .dockerignore
 
 To optimize your Docker build process and ensure that unnecessary files are not included in your **Docker** image, you should leverage a .dockerignore file. This file works similarly to a .gitignore file, allowing you to specify which files and directories should be excluded from the build context when Docker creates an image.
 
@@ -79,7 +87,7 @@ By excluding unnecessary files from the **Docker** build context, you make the *
 
 Additionally, excluding large directories (like node_modules/ or build artifacts) can significantly reduce the time it takes to build the image, as **Docker** won’t need to process or upload those files.
 
-### 3.- Use Multi-Stage builds for smaller and more efficient images
+### 4.- Use Multi-Stage builds for smaller and more efficient images
 
 One of the most effective ways to reduce the size of your Docker images is by using multi-stage builds. Multi-stage builds allow you to separate the build process from the final image, ensuring that only the necessary artifacts are included in the final container, while discarding any non-essential files, dependencies, or build tools. This practice is invaluable for optimizing image size, improving security, and reducing the surface area for potential vulnerabilities.
 
@@ -138,7 +146,7 @@ In the final stage, the **Dockerfile** again starts with the same minimal Python
 
 Only the application code and installed dependencies are included in this final image, keeping it lean and free from any build tools or unnecessary files.
 
-### 4.- Concatenate RUN Commands for more efficient Dockerfiles
+### 5.- Concatenate RUN Commands for more efficient Dockerfiles
 
 When building **Docker** images, every ```RUN``` command in the **Dockerfile** results in a new layer being created. This is an important concept because each layer not only consumes storage but also adds time to the image build process. 
 
