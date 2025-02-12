@@ -136,13 +136,13 @@ CMD ["python", "app.py"]
 
 In the build stage, the **Dockerfile** starts with a minimal Python 3.14 base image (python:3.14-slim). 
 
-The WORKDIR directive sets /app as the working directory inside the container, where all subsequent commands will be executed. 
+The ```WORKDIR``` directive sets __/app__ as the working directory inside the container, where all subsequent commands will be executed.
 
-The requirements.txt file is then copied into the container, and Python dependencies are installed with pip. Using the --no-cache-dir option ensures that unnecessary package installation caches are not included, further reducing image size.
+The requirements.txt file is then copied into the container, and Python dependencies are installed with pip. Using Docker withe the ```--no-cache-dir``` option ensures that unnecessary package installation caches are not included, further reducing image size.
 
 After installing the dependencies, the rest of the application code is copied into the container. This stage is focused on building the environment and dependencies needed for the application.
 
-In the final stage, the **Dockerfile** again starts with the same minimal Python 3.14 base image. The WORKDIR is set to /app, and the dependencies installed during the build stage are copied over using the COPY --from=build directive, which pulls files from the previous build stage. 
+In the final stage, the **Dockerfile** again starts with the same minimal Python 3.14 base image. The ```WORKDIR``` is set to __/app__, and the dependencies installed during the build stage are copied over using the ```COPY --from=``` build directive, which pulls files from the previous build stage. 
 
 Only the application code and installed dependencies are included in this final image, keeping it lean and free from any build tools or unnecessary files.
 
