@@ -23,6 +23,8 @@ If you don't have [Hadolint](https://github.com/hadolint/hadolint) installed yet
 brew install hadolint
 ```
 
+### Writin a Dockerfile
+
 To better understand how [Hadolint](https://github.com/hadolint/hadolint) works, let's create a **Dockerfile** that contains several common issues and anti-patterns. This example deliberately includes problems that [Hadolint](https://github.com/hadolint/hadolint) will detect:
 
 ```dockerfile
@@ -68,3 +70,16 @@ This Dockerfile contains several issues that Hadolint will flag:
 - Inefficient copying of build context
 
 When we run [Hadolint](https://github.com/hadolint/hadolint) on this **Dockerfile**, it will help us identify these issues and provide suggestions for improvement. Let's see what happens when we analyze it in the next section.
+
+### Linting a Dockerfile with Hadolint
+
+Let's take a closer look at our problematic **Dockerfile** by running an analysis with [Hadolint](https://github.com/hadolint/hadolint) to identify potential issues and areas for improvement. [Hadolint](https://github.com/hadolint/hadolint) will help us spot common mistakes, security risks, and optimization opportunities in the **Dockerfile**. By running this analysis, we can ensure that the **Dockerfile** adheres to best practices, reduces image size, and improves both security and maintainability. 
+
+Let's run Hadolint:
+
+```bash
+hadolint Dockerfile
+```
+
+This will run the static analysis and display a list of warnings or issues directly in your terminal.
+
