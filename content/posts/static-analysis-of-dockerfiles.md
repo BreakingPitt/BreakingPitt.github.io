@@ -8,10 +8,10 @@ title = 'Static Analys of Dockerfiles'
 
 [Hadolint](https://github.com/hadolint/hadolint) is an open-source tool designed for static analysis of **Dockerfiles**. Its purpose is to help you identify common errors, security issues, and improve **Docker** image building practices. It works similarly to a "linter," meaning it analyzes your **Dockerfile** code and provides recommendations on how to optimize it and ensure best practices are followed, such as:
 
-    - Reducing image size.
-    - Enhancing security.
-    - Optimizing image layers.
-    - Verifying unnecessary commands.
+- Reducing image size.
+- Enhancing security.
+- Optimizing image layers.
+- Verifying unnecessary commands.
 
 Being based on [ShellCheck](https://www.shellcheck.net/), it also reviews the **Bash** code within the ```RUN``` instructions of your **Dockerfile**, helping to detect potential errors or discouraged practices in shell scripts.
 
