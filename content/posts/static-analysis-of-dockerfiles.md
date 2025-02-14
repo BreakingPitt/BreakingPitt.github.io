@@ -83,3 +83,15 @@ hadolint Dockerfile
 
 This will run the static analysis and display a list of warnings or issues directly in your terminal.
 
+
+```bash
+Dockerfile:2 DL3006 Always tag the version of an image explicitly
+Dockerfile:4 DL4000 MAINTAINER is deprecated
+Dockerfile:8 DL3009 Delete the apt-get lists after installing something
+Dockerfile:8 DL3015 Avoid additional packages by specifying `--no-install-recommends`
+Dockerfile:10 SC2154 Run is referenced but not assigned
+Dockerfile:10 DL3009 Delete the apt-get lists after installing something
+Dockerfile:10 DL3008 Pin versions in apt get install
+Dockerfile:15 DL3013 Pin versions in pip
+Dockerfile:17 DL3025 Use arguments JSON notation for CMD and ENTRYPOINT arguments
+```
