@@ -23,8 +23,6 @@ If you don't have [Hadolint](https://github.com/hadolint/hadolint) installed yet
 brew install hadolint
 ```
 
-
-```Dockerfile
 To better understand how [Hadolint](https://github.com/hadolint/hadolint) works, let's create a **Dockerfile** that contains several common issues and anti-patterns. This example deliberately includes problems that [Hadolint](https://github.com/hadolint/hadolint) will detect:
 
 ```dockerfile
