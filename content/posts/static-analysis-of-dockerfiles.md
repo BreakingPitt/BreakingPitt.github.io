@@ -95,3 +95,54 @@ Dockerfile:15 DL3015 info: Avoid additional packages by specifying `--no-install
 Dockerfile:24 DL3042 warning: Avoid use of cache directory with pip. Use `pip install --no-cache-dir <package>`
 Dockerfile:30 DL3025 warning: Use arguments JSON notation for CMD and ENTRYPOINT arguments
 ```
+
+### Fixing the issues
+
+After analyzing the warnings and errors reported by [Hadolint](https://github.com/hadolint/hadolint), we can create an improved version of our **Dockerfile** that follows best practices. Here's the corrected version of the **Dockerfile** with explanations for each improvement:
+
+```dockerfile
+# Use specific version of base image
+FROM python:3.11-slim
+
+# Use LABEL instead of deprecated MAINTAINER
+LABEL maintainer="testuser@test.com"
+
+# Set working directory
+WORKDIR /app
+
+# Copy only requirements file first to leverage Docker cache
+COPY requirements.txt .
+
+# Combine RUN commands, pin versions, clean cache, and create non-root user
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    curl=7.88.1-10 && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    groupadd -r appuser && \
+    useradd -r -g appuser appuser && \
+    chown -R appuser:appuser /app
+
+# Copy application code
+COPY --chown=appuser:appuser . .
+
+# Switch to non-root user
+USER appuser
+
+# Document the port that will be exposed
+EXPOSE 8000/tcp
+
+# Use JSON notation for CMD
+CMD ["python3", "app.py"]
+```
+
+By following [Hadolint](https://github.com/hadolint/hadolint) recommendations, we've significantly improved our **Dockerfile**. The optimized version is:
+
+- More secure (non-root user, pinned versions)
+- More efficient (reduced layers, optimized cache)
+- More maintainable (clear structure, documented choices)
+- More reliable (specific versions, reproducible builds)
+
+Remember that [Hadolint](https://github.com/hadolint/hadolint) is just one tool in your Docker development toolkit. While it helps catch common issues and enforce best practices, it's important to also consider your specific use case and requirements when building Docker images.
+
