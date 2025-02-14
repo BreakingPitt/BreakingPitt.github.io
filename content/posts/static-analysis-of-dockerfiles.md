@@ -85,13 +85,13 @@ This will run the static analysis and display a list of warnings or issues direc
 
 
 ```bash
-Dockerfile:2 DL3006 Always tag the version of an image explicitly
-Dockerfile:4 DL4000 MAINTAINER is deprecated
-Dockerfile:8 DL3009 Delete the apt-get lists after installing something
-Dockerfile:8 DL3015 Avoid additional packages by specifying `--no-install-recommends`
-Dockerfile:10 SC2154 Run is referenced but not assigned
-Dockerfile:10 DL3009 Delete the apt-get lists after installing something
-Dockerfile:10 DL3008 Pin versions in apt get install
-Dockerfile:15 DL3013 Pin versions in pip
-Dockerfile:17 DL3025 Use arguments JSON notation for CMD and ENTRYPOINT arguments
+Dockerfile:2 DL3006 warning: Always tag the version of an image explicitly
+Dockerfile:5 DL4000 error: MAINTAINER is deprecated
+Dockerfile:8 DL3002 warning: Last USER should not be root
+Dockerfile:11 DL3009 info: Delete the apt-get lists after installing something
+Dockerfile:15 DL3059 info: Multiple consecutive `RUN` instructions. Consider consolidation.
+Dockerfile:15 DL3008 warning: Pin versions in apt get install. Instead of `apt-get install <package>` use `apt-get install <package>=<version>`
+Dockerfile:15 DL3015 info: Avoid additional packages by specifying `--no-install-recommends`
+Dockerfile:24 DL3042 warning: Avoid use of cache directory with pip. Use `pip install --no-cache-dir <package>`
+Dockerfile:30 DL3025 warning: Use arguments JSON notation for CMD and ENTRYPOINT arguments
 ```
