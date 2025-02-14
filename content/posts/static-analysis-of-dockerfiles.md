@@ -17,9 +17,56 @@ Being based on [ShellCheck](https://www.shellcheck.net/), it also reviews the **
 
 ### Installation
 
-[Hadolint](https://github.com/hadolint/hadolint) can be installed in different ways, depending on your operating system. Here’s how to do it using a Mac computer:
+If you don't have [Hadolint](https://github.com/hadolint/hadolint) installed yet, you can install on macOS with [Homebrew](https://brew.sh/):
 
 ```bash
 brew install hadolint
 ```
 
+
+```Dockerfile
+To better understand how [Hadolint](https://github.com/hadolint/hadolint) works, let's create a **Dockerfile** that contains several common issues and anti-patterns. This example deliberately includes problems that [Hadolint](https://github.com/hadolint/hadolint) will detect:
+
+```dockerfile
+# Using a non-specific base image.
+FROM python
+
+# Maintainer information.
+MAINTAINER testuser@test.com
+
+# Running as root without necessity.
+USER root
+
+# Update package indices.Installing dependencies without cleaning the cache.
+RUN apt-get update
+
+# Installing dependencies without cleaning the cache.
+Run apt-get install -y curl
+
+# No working directory specified.
+WORKDIR /
+
+# Copying files without considering the build context.
+COPY . .
+
+# Installing global dependencies unnecessarily.
+RUN pip3 install -r requirements.txt
+
+# Exposing an unnecessary port
+EXPOSE 8000
+
+# Default command to run when the container starts
+CMD python3 app.py
+```
+
+This Dockerfile contains several issues that Hadolint will flag:
+
+- Use of deprecated MAINTAINER instruction
+- Non-specific base image tag
+- Separate RUN commands for apt-get operations
+- Missing cleanup of apt cache
+- No version pinning for packages
+- Potentially unsafe use of root user
+- Inefficient copying of build context
+
+When we run [Hadolint](https://github.com/hadolint/hadolint) on this **Dockerfile**, it will help us identify these issues and provide suggestions for improvement. Let's see what happens when we analyze it in the next section.
