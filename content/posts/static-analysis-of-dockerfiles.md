@@ -23,7 +23,7 @@ If you don't have [Hadolint](https://github.com/hadolint/hadolint) installed yet
 brew install hadolint
 ```
 
-### Writin a Dockerfile
+### Writing a Dockerfile
 
 To better understand how [Hadolint](https://github.com/hadolint/hadolint) works, let's create a **Dockerfile** that contains several common issues and anti-patterns. This example deliberately includes problems that [Hadolint](https://github.com/hadolint/hadolint) will detect:
 
@@ -59,7 +59,7 @@ EXPOSE 8000
 CMD python3 app.py
 ```
 
-This Dockerfile contains several issues that Hadolint will flag:
+This **Dockerfile** contains several issues that Hadolint will flag:
 
 - Use of deprecated MAINTAINER instruction.
 - Non-specific base image tag.
@@ -173,6 +173,49 @@ EXPOSE 8000/tcp
 # Use JSON notation for CMD
 CMD ["python3", "app.py"]
 ```
+### Integrating Hadolint with GitHub Actions
+
+Automating **Dockerfile** linting as part of your CI/CD pipeline is an essential step to ensure that best practices are always followed. [GitHub Actions](https://github.com/features/actions) provides a great way to automate the linting process using [Hadolint](https://github.com/hadolint/hadolint).
+
+Here’s how you can integrate [Hadolint](https://github.com/hadolint/hadolint) into your [GitHub Actions](https://github.com/features/actions) workflow:
+
+Lets start by creating a ```.github/workflows/dockerfile-lint.yml``` file in our repository, this file will define the steps for linting your **Dockerfile**, every time a pull request is created or a change in the code is pushed to the repository:
+
+```yaml
+name: Lint Dockerfile
+
+on:
+  pull_request:
+    paths:
+      - Dockerfile
+  push:
+    branches:
+      - main
+    paths:
+      - Dockerfile
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Hadolint
+      - name: Set up Hadolint
+        uses: hadolint/hadolint-action@v2
+
+      # Run Hadolint to analyze the Dockerfile
+      - name: Run Hadolint
+        run: hadolint Dockerfile
+```
+After the workflow is set up, [GitHub Actions](https://github.com/features/actions) will run [Hadolint](https://github.com/hadolint/hadolint) on the **Dockerfile** each time a pull request is opened or code is pushed. You can view the results of the linting in the Actions tab of your GitHub repository.
+
+If any issues are found, the job will fail, and you’ll see the specific warnings or errors from [Hadolint](https://github.com/hadolint/hadolint) in the logs. You can then correct the issues in the **Dockerfile** and push the changes.
+
+### Conclusion
 
 By following [Hadolint](https://github.com/hadolint/hadolint) recommendations, we've significantly improved our **Dockerfile**. The optimized version is:
 
