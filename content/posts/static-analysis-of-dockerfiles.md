@@ -61,13 +61,13 @@ CMD python3 app.py
 
 This Dockerfile contains several issues that Hadolint will flag:
 
-- Use of deprecated MAINTAINER instruction
-- Non-specific base image tag
-- Separate RUN commands for apt-get operations
-- Missing cleanup of apt cache
-- No version pinning for packages
-- Potentially unsafe use of root user
-- Inefficient copying of build context
+- Use of deprecated MAINTAINER instruction.
+- Non-specific base image tag.
+- Separate RUN commands for apt-get operations.
+- Missing cleanup of apt cache.
+- No version pinning for packages.
+- Potentially unsafe use of root user.
+- Inefficient copying of build context.
 
 When we run [Hadolint](https://github.com/hadolint/hadolint) on this **Dockerfile**, it will help us identify these issues and provide suggestions for improvement. Let's see what happens when we analyze it in the next section.
 
@@ -75,12 +75,12 @@ When we run [Hadolint](https://github.com/hadolint/hadolint) on this **Dockerfil
 
 [Hadolint](https://github.com/hadolint/hadolint) is a highly configurable tool, allowing you to customize its behavior according to your specific needs and requirements. You can create a ```.hadolint.yaml``` configuration file within your project to fine-tune various aspects of its functionality. This file provides several options to optimize how [Hadolint](https://github.com/hadolint/hadolint) works with your **Dockerfiles**, including:
 
-- Ignored rules: Specify which linting rules to ignore, giving you control over the rules that matter most for your project.
-- Trusted registries: Define trusted Docker registries to prevent warnings about certain images, ensuring you’re working with reliable sources.
-- Label schema requirements: Enforce specific labeling conventions and schema to ensure consistency and compliance with your project’s standards.
-- Severity overrides: Adjust the severity of certain rules (e.g., set a rule to a "warning" instead of "error") to prioritize issues according to your project's requirements.
+- **Ignored rules:** Specify which linting rules to ignore, giving you control over the rules that matter most for your project.
+- **Trusted registries:** Define trusted Docker registries to prevent warnings about certain images, ensuring you’re working with reliable sources.
+- **Label schema requirements:** Enforce specific labeling conventions and schema to ensure consistency and compliance with your project’s standards.
+- **Severity overrides:** Adjust the severity of certain rules (e.g., set a rule to a "warning" instead of "error") to prioritize issues according to your project's requirements.
 
-Here's an example of a .hadolint.yaml file that shows you how to configure [Hadolint](https://github.com/hadolint/hadolint) for your project:
+Here's an example of a ```.hadolint.yaml``` file that shows you how to configure [Hadolint](https://github.com/hadolint/hadolint) for your project:
 
 ```bash
 # .hadolint.yaml
@@ -107,19 +107,19 @@ severity:
   DL3026: error    # Keep DL3026 (missing USER) as an error
 ```
 
-For detailed instructions on configuring these settings and leveraging Hadolint's full capabilities, refer to the official Hadolint documentation.
+For detailed instructions on configuring these settings and leveraging [Hadolint](https://github.com/hadolint/hadolint) capabilities, refer to the official [Hadolint documentation](https://github.com/hadolint/hadolint?tab=readme-ov-file#rules).
+
 ### Linting a Dockerfile with Hadolint
 
 Let's take a closer look at our problematic **Dockerfile** by running an analysis with [Hadolint](https://github.com/hadolint/hadolint) to identify potential issues and areas for improvement. [Hadolint](https://github.com/hadolint/hadolint) will help us spot common mistakes, security risks, and optimization opportunities in the **Dockerfile**. By running this analysis, we can ensure that the **Dockerfile** adheres to best practices, reduces image size, and improves both security and maintainability. 
 
-Let's run Hadolint:
+Let's run [Hadolint](https://github.com/hadolint/hadolint):
 
 ```bash
 hadolint Dockerfile
 ```
 
 This will run the static analysis and display a list of warnings or issues directly in your terminal.
-
 
 ```bash
 Dockerfile:2 DL3006 warning: Always tag the version of an image explicitly
@@ -176,10 +176,10 @@ CMD ["python3", "app.py"]
 
 By following [Hadolint](https://github.com/hadolint/hadolint) recommendations, we've significantly improved our **Dockerfile**. The optimized version is:
 
-- More secure (non-root user, pinned versions)
-- More efficient (reduced layers, optimized cache)
-- More maintainable (clear structure, documented choices)
-- More reliable (specific versions, reproducible builds)
+- More secure (non-root user, pinned versions).
+- More efficient (reduced layers, optimized cache).
+- More maintainable (clear structure, documented choices).
+- More reliable (specific versions, reproducible builds).
 
 Remember that [Hadolint](https://github.com/hadolint/hadolint) is just one tool in your Docker development toolkit. While it helps catch common issues and enforce best practices, it's important to also consider your specific use case and requirements when building Docker images.
 
