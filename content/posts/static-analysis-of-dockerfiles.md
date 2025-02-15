@@ -71,6 +71,43 @@ This Dockerfile contains several issues that Hadolint will flag:
 
 When we run [Hadolint](https://github.com/hadolint/hadolint) on this **Dockerfile**, it will help us identify these issues and provide suggestions for improvement. Let's see what happens when we analyze it in the next section.
 
+### Configuring Hadolint
+
+[Hadolint](https://github.com/hadolint/hadolint) is a highly configurable tool, allowing you to customize its behavior according to your specific needs and requirements. You can create a ```.hadolint.yaml``` configuration file within your project to fine-tune various aspects of its functionality. This file provides several options to optimize how [Hadolint](https://github.com/hadolint/hadolint) works with your **Dockerfiles**, including:
+
+- Ignored rules: Specify which linting rules to ignore, giving you control over the rules that matter most for your project.
+- Trusted registries: Define trusted Docker registries to prevent warnings about certain images, ensuring you’re working with reliable sources.
+- Label schema requirements: Enforce specific labeling conventions and schema to ensure consistency and compliance with your project’s standards.
+- Severity overrides: Adjust the severity of certain rules (e.g., set a rule to a "warning" instead of "error") to prioritize issues according to your project's requirements.
+
+Here's an example of a .hadolint.yaml file that shows you how to configure [Hadolint](https://github.com/hadolint/hadolint) for your project:
+
+```bash
+# .hadolint.yaml
+
+# Define ignored rules
+ignored:
+  - DL3008  # Ignore warning about using apt-get instead of apt
+  - DL4006  # Ignore warning about missing labels
+
+# Define trusted registries
+trusted-registries:
+  - docker.io
+  - my-private-registry.com
+
+# Enforce label schema requirements
+label-schema:
+  description: "A custom Docker image"
+  version: "1.0"
+  vendor: "Your Company"
+  
+# Severity overrides
+severity:
+  DL3003: warning  # Set DL3003 (no labels) to warning instead of error
+  DL3026: error    # Keep DL3026 (missing USER) as an error
+```
+
+For detailed instructions on configuring these settings and leveraging Hadolint's full capabilities, refer to the official Hadolint documentation.
 ### Linting a Dockerfile with Hadolint
 
 Let's take a closer look at our problematic **Dockerfile** by running an analysis with [Hadolint](https://github.com/hadolint/hadolint) to identify potential issues and areas for improvement. [Hadolint](https://github.com/hadolint/hadolint) will help us spot common mistakes, security risks, and optimization opportunities in the **Dockerfile**. By running this analysis, we can ensure that the **Dockerfile** adheres to best practices, reduces image size, and improves both security and maintainability. 
