@@ -24,4 +24,5 @@ Once the installation is complete, verify that the [Trivy](https://trivy.dev/lat
 
 ```bash
 trivy --version
+Version: 0.59.1
 ```
