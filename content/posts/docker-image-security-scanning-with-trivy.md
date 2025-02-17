@@ -57,4 +57,53 @@ As we have seen in previous sections, [Trivy](https://trivy.dev/latest/) provide
 
 ## Scanning Docker images.
 
+The **Alpine Linux** image is a minimal, security-focused Linux distribution commonly used as a base image for creating lightweight Docker containers. However, even minimal images like Alpine can contain vulnerabilities, making it crucial to scan them regularly to ensure they don't introduce security risks into your application.
+
+To demonstrate the power of [Trivy](https://trivy.dev/latest/) lets scan the ```alpine:3.18.12``` Docker image, the first step is to pull it from (Docker Hub](https://hub.docker.com/). If you don’t have the image locally yet, you'll need to pull it so you can perform the vulnerability scan. Running the following command will download the ```alpine:3.18.12``` image to your local machine:
+
+```bash
+docker pull alpine:3.18.12
+3.18.12: Pulling from library/alpine
+44cf07d57ee4: Download complete
+Digest: sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f
+Status: Downloaded newer image for alpine:3.18.12
+docker.io/library/alpine:3.18.12
+```
+
+Once the image has been successfully pulled, you're ready to proceed with the vulnerability scanning process using [Trivy](https://trivy.dev/latest/) to identify any potential security issues that may exist within the image. To make the analysis shorter, I'll focus the results solely on critical vulnerabilities, you can use the following command in Trivy:
+
+```bash
+trivy image --severity CRITICAL alpine:3.13.2
+2025-02-17T16:30:02+01:00	INFO	[vuln] Vulnerability scanning is enabled
+2025-02-17T16:30:02+01:00	INFO	[secret] Secret scanning is enabled
+2025-02-17T16:30:02+01:00	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+2025-02-17T16:30:02+01:00	INFO	[secret] Please see also https://aquasecurity.github.io/trivy/v0.59/docs/scanner/secret#recommendation for faster secret detection
+2025-02-17T16:30:03+01:00	INFO	Detected OS	family="alpine" version="3.13.2"
+2025-02-17T16:30:03+01:00	INFO	[alpine] Detecting vulnerabilities...	os_version="3.13" repository="3.13" pkg_num=14
+2025-02-17T16:30:03+01:00	INFO	Number of language-specific files	num=0
+2025-02-17T16:30:03+01:00	WARN	This OS version is no longer supported by the distribution	family="alpine" version="3.13.2"
+2025-02-17T16:30:03+01:00	WARN	The vulnerability detection may be insufficient because security updates are not provided
+
+alpine:3.13.2 (alpine 3.13.2)
+
+Total: 4 (CRITICAL: 4)
+
+┌──────────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬──────────────────────────────────────────────────────────────┐
+│   Library    │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                            Title                             │
+├──────────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ apk-tools    │ CVE-2021-36159 │ CRITICAL │ fixed  │ 2.12.1-r0         │ 2.12.6-r0     │ libfetch: an out of boundary read while libfetch uses strtol │
+│              │                │          │        │                   │               │ to parse...                                                  │
+│              │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2021-36159                   │
+├──────────────┼────────────────┤          │        ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ libcrypto1.1 │ CVE-2021-3711  │          │        │ 1.1.1j-r0         │ 1.1.1l-r0     │ openssl: SM2 Decryption Buffer Overflow                      │
+│              │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2021-3711                    │
+├──────────────┤                │          │        │                   │               │                                                              │
+│ libssl1.1    │                │          │        │                   │               │                                                              │
+│              │                │          │        │                   │               │                                                              │
+├──────────────┼────────────────┤          │        ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ zlib         │ CVE-2022-37434 │          │        │ 1.2.11-r3         │ 1.2.12-r2     │ zlib: heap-based buffer over-read and overflow in inflate()  │
+│              │                │          │        │                   │               │ in inflate.c via a...                                        │
+│              │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2022-37434                   │
+└──────────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴──────────────────────────────────────────────────────────────┘
+```
 
