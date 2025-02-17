@@ -4,7 +4,7 @@ draft = false
 title = 'Docker Image Security Scanning With Trivy'
 +++
 
-# Docker image security scanning with Trivy
+## Overview
 
 Security in container images has become one of the most critical aspects of maintaining a secure and resilient containerized environment. As more organizations embrace containerization for its scalability, portability, and efficiency, the need to ensure that the containers are secure has grown exponentially. Container images, when built improperly or left unmonitored, can become a significant vector for cyberattacks, leading to vulnerabilities that expose systems and data to threats.
 
@@ -27,7 +27,7 @@ trivy --version
 Version: 0.59.1
 ```
 
-### Scanning for vulnerabilities
+## Scanning for vulnerabilities
 
 When you run the [Trivy](https://trivy.dev/latest/) command to scan for vulnerabilities in your container images, [Trivy](https://trivy.dev/latest/) first ensures that it has the most up-to-date vulnerability database by downloading the relevant data. It then performs a thorough comparison, scanning the components of your container image—including operating system packages, libraries, and dependencies—against the vulnerabilities listed in the database. This allows [Trivy](https://trivy.dev/latest/) to identify and report any known security risks within the image.
 
