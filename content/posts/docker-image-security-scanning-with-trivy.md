@@ -43,4 +43,18 @@ When you run the [Trivy](https://trivy.dev/latest/) command to scan for vulnerab
 
 By classifying vulnerabilities into these categories, [Trivy](https://trivy.dev/latest/) provides a clear and actionable way to prioritize remediation efforts based on the severity of each issue and helps teams take appropriate action, ensuring that the most critical vulnerabilities are patched first while allowing for a more measured approach to lower-severity risks.
 
+## Key components Trivy scans in container images
+
+As we have seen in previous sections, [Trivy](https://trivy.dev/latest/) provides comprehensive scanning for container images, helping you identify vulnerabilities in various key components. Here are the main elements [Trivy](https://trivy.dev/latest/) inspects during its scan:
+
+- **Package Managers and Dependencies:** [Trivy](https://trivy.dev/latest/) is capable of scanning multiple package managers, such as ```apt```, ```yum```, ```apk```, and ```npm```. Checking for vulnerabilities across a wide range of software dependencies, regardless of the package manager used in your container image.
+
+- **Cross-Platform Scanning:** Whether your image is designed for Linux or Windows, [Trivy](https://trivy.dev/latest/) can scan vulnerabilities in both types. This flexibility ensures that no matter which platform you're deploying on, your images are adequately checked for security risks.
+
+- **Diverse Image Formats:** [Trivy](https://trivy.dev/latest/) can scan images in various formats, including Docker images, tar archives, and filesystems. Whether your images are stored locally or in a specific archive format, Trivy can analyze them for vulnerabilities.
+
+- **Environments and Deployments:** [Trivy](https://trivy.dev/latest/) is not limited to scanning images on local Docker containers; it also works with images running in Kubernetes pods and other environments. This allows you to scan images across the entire deployment pipeline, whether they are running in development, staging, or production environments.
+
+## Scanning Docker images.
+
 
