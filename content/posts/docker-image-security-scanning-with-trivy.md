@@ -107,3 +107,12 @@ Total: 4 (CRITICAL: 4)
 └──────────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴──────────────────────────────────────────────────────────────┘
 ```
 
+## Integrating Trivy with GitHub Actions
+
+Automating container image vulnerability scanning as part of your CI/CD pipeline is crucial for maintaining a secure environment. GitHub Actions provides a great way to automate the scanning process using [Trivy](https://trivy.dev/latest/).
+
+Here’s how you can integrate **Trivy** into your GitHub Actions workflow:
+
+Start by creating a `.github/workflows/trivy-scan.yml` file in your repository. This file will define the steps for scanning your container images with [Trivy](https://trivy.dev/latest/) every time a pull request is created or when changes are pushed to the repository. 
+
+This integration ensures that every time code is updated, [Trivy](https://trivy.dev/latest/) will automatically scan the associated Docker images for vulnerabilities, helping to catch any security issues early in the development cycle.
