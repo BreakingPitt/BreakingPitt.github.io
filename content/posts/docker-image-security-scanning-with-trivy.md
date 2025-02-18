@@ -109,10 +109,66 @@ Total: 4 (CRITICAL: 4)
 
 ## Integrating Trivy with GitHub Actions
 
-Automating container image vulnerability scanning as part of your CI/CD pipeline is crucial for maintaining a secure environment. GitHub Actions provides a great way to automate the scanning process using [Trivy](https://trivy.dev/latest/).
+Automating container image vulnerability scanning as part of your CI/CD pipeline is crucial for maintaining a secure environment. [GitHub Actions](https://github.com/features/actions) provides a great way to automate the scanning process using [Trivy](https://trivy.dev/latest/).
 
-Here’s how you can integrate **Trivy** into your GitHub Actions workflow:
+Here’s how you can integrate **Trivy** into your [GitHub Actions](https://github.com/features/actions) workflow:
 
 Start by creating a `.github/workflows/trivy-scan.yml` file in your repository. This file will define the steps for scanning your container images with [Trivy](https://trivy.dev/latest/) every time a pull request is created or when changes are pushed to the repository. 
 
 This integration ensures that every time code is updated, [Trivy](https://trivy.dev/latest/) will automatically scan the associated Docker images for vulnerabilities, helping to catch any security issues early in the development cycle.
+
+
+```yaml
+name: trivy-scanning
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: write  # Adjusted permission scope
+
+jobs:
+  trivy-scanning-job:
+    name: trivy-sec-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'HIGH,CRITICAL'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t docker.io/devops-counsel/py-app:${{ github.sha }} .
+
+      - name: Run Trivy vulnerability scanner on Docker image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/devops-counsel/py-app:${{ github.sha }}'
+          format: 'table'
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+```
+
+After the workflow is set up, [GitHub Actions](https://github.com/features/actions) will run [Trivy](https://trivy.dev/latest/) on your Docker images each time a pull request is opened or code is pushed. You can view the results of the vulnerability scan in the Actions tab of your GitHub repository.
+
+If any vulnerabilities are found, the job will fail, and you’ll see the specific security issues and their severity levels from [Trivy](https://trivy.dev/latest/) in the logs. You can then address the vulnerabilities in your Docker image and push the necessary changes to your repository.
+
+This process helps ensure that your container images are always secure and free from critical vulnerabilities before they are deployed to production.
+
