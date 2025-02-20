@@ -11,9 +11,9 @@ title = 'Docker Compose Introduction'
 
 [Docker Compose](https://docs.docker.com/compose/) helps you simplifying Docker workflows:
 
-- **Multi-container Management** Many applications require multiple services to run—such as a web server, database, caching system, and message queue. [Docker Compose](https://docs.docker.com/compose/) allows you to manage all these containers with a single configuration file, simplifying the process of orchestrating complex environments.
+- **Multi-container Management** Many applications require multiple services to run such as a web server, database, caching system, and message queue. [Docker Compose](https://docs.docker.com/compose/) allows you to manage all these containers with a single configuration file, simplifying the process of orchestrating complex environments.
 
-- **Simplified Setup:** [Docker Compose](https://docs.docker.com/compose/) helps you define how each container should behave, how they are connected, and what dependencies they have on each other, simplifiying the setup process and  allowing you to quickly deploy and test your entire application stack locally.
+- **Simplified Setup:** [Docker Compose](https://docs.docker.com/compose/) helps you define how each container should behave, how they are connected, and what dependencies they have on each other, simplifiying the setup process and allowing you to quickly deploy and test your entire application stack locally.
 
 - **Consistency Across Environments:** By using [Docker Compose](https://docs.docker.com/compose/), you ensure that the same configuration is used across all environments—development, testing, and production. This consistency reduces the chances of issues when deploying applications.
 
