@@ -1,7 +1,7 @@
 +++
 date = '2025-02-12T08:51:34+01:00'
 draft = false
-title = 'Static Analys of Dockerfiles'
+title = 'Static Analysis of Dockerfiles'
 +++
 
 ## Overview
