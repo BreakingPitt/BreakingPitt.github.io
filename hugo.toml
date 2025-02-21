@@ -93,3 +93,7 @@ PygmentsStyle = "monokai"
     identifier = "about"
     name = "About"
     url = "about/"
+
+[services]
+  [services.googleAnalytics]
+    id = 'G-PP7D0S3CR6'
