@@ -1,6 +1,7 @@
 +++
 date = '2025-02-12T08:51:34+01:00'
 draft = false
+tags = ['Docker', 'Dockerfile', 'Hadolint', 'DevSecOps']
 title = 'Static Analysis of Dockerfiles'
 +++
 
