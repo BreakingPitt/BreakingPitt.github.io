@@ -1,6 +1,7 @@
 +++
 date = '2025-02-20T10:02:43+01:00'
 draft = false
+tags = ['Docker', 'Docker Compose']
 title = 'Docker Compose Introduction'
 +++
 
