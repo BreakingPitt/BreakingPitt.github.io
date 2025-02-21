@@ -43,3 +43,20 @@ This [YAML](https://yaml.org/) configuration allows you to:
 - Scale services up or down with simple commands.
 - Manage environment-specific configurations through multiple compose files.
 
+## Core components and structure of a Docker Compose YAML configuration file
+
+Let me explain the key components and structure of a [Docker Compose](https://docs.docker.com/compose/) [YAML syntax](https://yaml.org/) configuration file, here I will cover the main components and structure of a [Docker Compose](https://docs.docker.com/compose/) [YAML](https://yaml.org/) configuration. Each section includes practical examples and explains the purpose of different configuration options.
+
+### Core components
+
+#### Services.
+
+**Services** in [Docker Compose](https://docs.docker.com/compose/) represent the containers that make up your application. Each service is defined with various configuration options:
+
+    - **Image:** Specify a pre-built Docker image to use for the service.
+    - **Build:** Define instructions to build a custom image for the service.
+    - **Ports:** Map container ports to host ports.
+    - **Environment variables:** Set environment variables for the container.
+    - **Volumes:** Mount host directories or named volumes to the container.
+    - **Networks:** Connect the service to specific networks.
+    - **Depends_on:** Specify service dependencies.
