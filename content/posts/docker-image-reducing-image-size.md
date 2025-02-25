@@ -66,7 +66,9 @@ ubuntu       latest    72297848456d   4 weeks ago    117MB
 
 ### Use a distroless base image
 
-Another effective way to reduce [Docker](https://www.docker.com/) image size and enhance security is by using distroless images. Unlike traditional base images like [Alpine Linux](https://www.alpinelinux.org/), Debian](https://www.debian.org/), or [Ubuntu](https://ubuntu.com/), distroless images contain only the application and its runtime dependencies, leaving out package managers, shells, and unnecessary utilities. This results in a much smaller image footprint and reduces the attack surface by eliminating extraneous components. 
+Another effective way to reduce [Docker](https://www.docker.com/) image size and enhance security is by using distroless images. Unlike traditional base images like [Alpine Linux](https://www.alpinelinux.org/), [Debian](https://www.debian.org/) or [Ubuntu](https://ubuntu.com/), distroless images contain only the application and its runtime dependencies, leaving out package managers, shells, and unnecessary utilities. 
+
+This results in a much smaller image footprint and reduces the attack surface by eliminating extraneous components. 
 
 Distroless images are ideal for running applications in production environments where you want to minimize vulnerabilities and ensure that only the necessary runtime components are included.
 
