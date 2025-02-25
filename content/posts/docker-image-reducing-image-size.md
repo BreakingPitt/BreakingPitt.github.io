@@ -84,3 +84,61 @@ gcr.io/distroless/python3   latest    981541f9c36f   N/A       83.3MB
 
 In comparison to standard base images, distroless images can be significantly smaller, as they contain only the essential elements required for your application to run, without the additional bulk of a general-purpose operating system.
 
+### Leverage Multi-stage builds
+
+One of the most effective ways to reduce the size of your [Docker](https://www.docker.com/ images is by using multi-stage builds. Multi-stage builds allow you to separate the build process from the final image, ensuring that only the necessary artifacts are included in the final container, while discarding any non-essential files, dependencies, or build tools. This practice is invaluable for optimizing image size, improving security, and reducing the surface area for potential vulnerabilities.
+
+The following _Dockerfile_ uses a multi-stage build approach to create a more efficient and secure image for deploying a Python application.
+
+```dockerfile
+
+# Stage 1: Build
+FROM python:3.14-slim AS build
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file and install the dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code
+COPY . .
+
+# Perform any additional build tasks if necessary
+# For example, compiling assets or running tests
+
+# Stage 2: Final Image
+FROM python:3.14-slim AS final
+
+# Set the working directory inside the container for the final image
+WORKDIR /app
+
+# Copy the installed dependencies from the build stage
+COPY --from=build /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+
+# Copy the application code from the build stage
+COPY --from=build /app .
+
+# Expose port 80
+EXPOSE 80
+
+# Define the environment variable
+ENV NAME World
+
+# Command to run the application
+CMD ["python", "app.py"]
+```
+
+In the build stage, the _Dockerfile_ starts with a minimal Python 3.14 base image (python:3.14-slim).
+
+The ```WORKDIR``` directive sets _/app_ as the working directory inside the container, where all subsequent commands will be executed.
+
+The _requirements.txt_ file is then copied into the container, and Python dependencies are installed with pip. Using Docker withe the ```--no-cache-dir``` option ensures that unnecessary package installation caches are not included, further reducing image size.
+
+After installing the dependencies, the rest of the application code is copied into the container. This stage is focused on building the environment and dependencies needed for the application.
+
+In the final stage, the _Dockerfile_ again starts with the same minimal Python 3.14 base image. The ```WORKDIR``` is set to _/app_, and the dependencies installed during the build stage are copied over using the ```COPY --from=``` build directive, which pulls files from the previous build stage.
+
+Only the application code and installed dependencies are included in this final image, keeping it lean and free from any build tools or unnecessary files.
+
