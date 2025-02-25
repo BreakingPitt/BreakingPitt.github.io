@@ -64,3 +64,21 @@ REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
 ubuntu       latest    72297848456d   4 weeks ago    117MB
 ```
 
+### Use a distroless base image
+
+Another effective way to reduce [Docker](https://www.docker.com/) image size and enhance security is by using distroless images. Unlike traditional base images like [Alpine Linux](https://www.alpinelinux.org/), Debian](https://www.debian.org/), or [Ubuntu](https://ubuntu.com/), distroless images contain only the application and its runtime dependencies, leaving out package managers, shells, and unnecessary utilities. This results in a much smaller image footprint and reduces the attack surface by eliminating extraneous components. 
+
+Distroless images are ideal for running applications in production environments where you want to minimize vulnerabilities and ensure that only the necessary runtime components are included.
+
+For example, a distroless image for a Python application will only contain the Python runtime and the application itself, without additional tools like bash or apt-get, making it more secure and efficient.
+
+Here's an example of the distroless image for Python:
+
+```bash
+~ docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED   SIZE
+gcr.io/distroless/python3   latest    981541f9c36f   N/A       83.3MB
+```
+
+In comparison to standard base images, distroless images can be significantly smaller, as they contain only the essential elements required for your application to run, without the additional bulk of a general-purpose operating system.
+
