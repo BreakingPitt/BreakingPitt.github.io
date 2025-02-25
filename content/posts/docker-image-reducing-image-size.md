@@ -26,3 +26,10 @@ Optimizing [Docker](https://www.docker.com/) image size isn't just about saving 
 - **Security implications** - Also bloated [Docker](https://www.docker.com/) images weaken security posture by expanding the attack surface with unnecessary packages and dependencies. As more components are added, vulnerability management becomes more complex, requiring additional monitoring efforts. Container security scanning processes demand more resources and time to analyze these larger images, increasing the overall security overhead.
 
 - **Slow down build and deployment pipelines** – Larger [Docker](https://www.docker.com/) images significantly slow CI/CD pipelines by increasing the time required to build and push images to registries. This delays developer feedback loops, making testing and debugging slower due to longer image builds and container startup times. Local testing also becomes cumbersome, as developers experience slower pull times for updated images, reducing productivity and slowing iteration cycles.
+
+## How to reduce Docker image size?
+
+To achieve the right balance between performance, resource consumption, and enhancing security, there are several strategies you can implement that effectively shrink your [Docker](https://www.docker.com/) images while ensuring they remain fully functional. These strategies focus on eliminating unnecessary files, streamlining dependencies and optimizing build processes without compromising the performance or integrity of your application.
+
+In the following sections, we'll explore some of the most effective techniques to achieve a lean, efficient [Docker](https://www.docker.com/) images that meets both performance and operational requirements.
+
