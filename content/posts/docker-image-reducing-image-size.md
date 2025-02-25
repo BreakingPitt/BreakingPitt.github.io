@@ -33,3 +33,18 @@ To achieve the right balance between performance, resource consumption, and enha
 
 In the following sections, we'll explore some of the most effective techniques to achieve a lean, efficient [Docker](https://www.docker.com/) images that meets both performance and operational requirements.
 
+### Use a minimal base image
+
+Probably, one of the most effective ways to reduce [Docker](https://www.docker.com/) image size is by starting with a minimal base image, instead of using heavier or more comprehensive images like [Ubuntu](https://ubuntu.com/) or [Debian](https://www.debian.org/), consider using a lightweight alternative such as [Alpine Linux](https://www.alpinelinux.org/). 
+
+Minimal base images, like [Alpine Linux](https://www.alpinelinux.org/), contain only the essential tools and libraries required to run your application, without the overhead of unnecessary packages. 
+
+By choosing a stripped-down image, you can significantly reduce the size of your [Docker](https://www.docker.com/) image, improve build times, and minimize the attack surface, all while retaining the core functionality needed to run your application. Furthermore, opting for a minimal base image ensures that you only add the dependencies your application truly requires, which leads to cleaner, more efficient images overall.
+
+The Alpine Linux base image used to illustrate this section, can be as small as 12.1MB. It’s not just small; it’s very secure as well.
+
+```bash
+~ docker images                                                                                                                         
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+alpine       latest    a8560b36e8b8   11 days ago   12.1MB
+```
