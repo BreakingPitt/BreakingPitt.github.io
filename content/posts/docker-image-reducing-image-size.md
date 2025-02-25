@@ -86,7 +86,9 @@ In comparison to standard base images, distroless images can be significantly sm
 
 ### Leverage Multi-stage builds
 
-One of the most effective ways to reduce the size of your [Docker](https://www.docker.com/ images is by using multi-stage builds. Multi-stage builds allow you to separate the build process from the final image, ensuring that only the necessary artifacts are included in the final container, while discarding any non-essential files, dependencies, or build tools. This practice is invaluable for optimizing image size, improving security, and reducing the surface area for potential vulnerabilities.
+One of the most effective ways to reduce the size of your [Docker](https://www.docker.com/) images is by using multi-stage builds. 
+
+Multi-stage builds allow you to separate the build process from the final image, ensuring that only the necessary artifacts are included in the final container, while discarding any non-essential files, dependencies, or build tools. This practice is invaluable for optimizing image size, improving security, and reducing the surface area for potential vulnerabilities.
 
 The following _Dockerfile_ uses a multi-stage build approach to create a more efficient and secure image for deploying a Python application.
 
