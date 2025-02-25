@@ -41,10 +41,26 @@ Minimal base images, like [Alpine Linux](https://www.alpinelinux.org/), contain 
 
 By choosing a stripped-down image, you can significantly reduce the size of your [Docker](https://www.docker.com/) image, improve build times, and minimize the attack surface, all while retaining the core functionality needed to run your application. Furthermore, opting for a minimal base image ensures that you only add the dependencies your application truly requires, which leads to cleaner, more efficient images overall.
 
-The Alpine Linux base image used to illustrate this section, can be as small as 12.1MB. It’s not just small; it’s very secure as well.
+The [Alpine Linux](https://www.alpinelinux.org/) base image used to illustrate this section, can be as small as **12.1MB**. It’s not just small; it’s very secure as well because has been built with security in mind, featuring a minimal set of packages and tools. Here's an example of how small it is:
 
 ```bash
 ~ docker images                                                                                                                         
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 alpine       latest    a8560b36e8b8   11 days ago   12.1MB
 ```
+On the other hand, [Debian](https://www.debian.org/) and [Ubuntu](https://ubuntu.com/) are larger base images, as they come with more pre-installed software packages. The [Debian](https://www.debian.org/) image, at **181MB**, provides a stable and versatile base with a more extensive set of packages that may be needed for certain applications. It's often favored for its stability, but this comes at the cost of a larger size.
+
+```bash
+~ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+debian       latest    35286826a88d   36 hours ago   181MB
+```
+
+[Ubuntu](https://ubuntu.com/), being one of the most widely used Linux distributions, is similarly large, with the latest version weighing in at **117MB**. [Ubuntu](https://ubuntu.com/) offers ease of use and broader support for various tools and applications. While this makes it a good choice for many environments, its size is substantially larger than  [Alpine Linux](https://www.alpinelinux.org/), making it less ideal for applications that prioritize compactness and speed.
+
+```bash
+~ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+ubuntu       latest    72297848456d   4 weeks ago    117MB
+```
+
