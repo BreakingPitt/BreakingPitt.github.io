@@ -144,3 +144,153 @@ In the final stage, the _Dockerfile_ again starts with the same minimal Python 3
 
 Only the application code and installed dependencies are included in this final image, keeping it lean and free from any build tools or unnecessary files.
 
+## Docker layer optimization
+
+[Docker](https://www.docker.com/) images are built using a layered architecture, where each layer represents a change made by a _Dockerfile_ instruction. Every time you execute commands like ```RUN```, ```COPY``` or ```ADD``` in your _Dockerfile_, [Docker](https://www.docker.com/) creates a new layer that records only the changes from the previous layer. This is an important concept because each layer not only consumes storage but also adds time to the image build process.
+
+Each layer is immutable, meaning once it’s created, it cannot be changed, only new layers can be added on top,  allowing [Docker](https://www.docker.com/)  to efficiently manage images by reusing unchanged layers across multiple builds, which improves both build speed and storage efficiency.
+
+Additionally, layers are cached and reused, meaning that unnecessary layers can increase the overall size and inefficiency of the image.
+
+### Combining related RUN commands
+
+In the following example,each ```RUN``` command create a layer in the image making the image larger because of the additional layers:
+
+```dockerfile
+
+# Use an official Python runtime as the base image
+FROM python:3.14-slim
+
+# Update the system
+RUN apt-get update
+
+# Install Python3
+RUN apt-get install -y python3
+
+# Install pip
+RUN apt-get install -y python3-pip
+
+# Execute apt-get clean 
+Clean the cache to reduce image size
+RUN apt-get clean 
+
+# Clean the cache to reduce image size
+RUN rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the application code into the container
+COPY . /app
+
+# Install Python dependencies from the requirements.txt file
+RUN pip3 install -r requirements.txt
+
+# Expose a port (if your application needs it)
+EXPOSE 8000
+
+# Default command to run when the container starts
+CMD ["python3", "app.py"]
+```
+
+To optimize the size of your [Docker](https://www.docker.com/) image, it’s a best practice to concatenate multiple ```RUN``` commands into a single statement making the _Dockerfile_ more efficient but also improving readability.
+
+
+```dockerfile
+# Use an official Python runtime as the base image
+FROM python:3.14-slim
+
+# Update the system, install Python3, pip, clean cache, 
+# and remove unnecessary files
+
+RUN apt-get update && apt-get install -y python3 python3-pip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the application code into the container
+COPY . /app
+
+# Install Python dependencies from the requirements.txt file
+RUN pip3 install -r requirements.txt
+
+# Expose a port (if your application needs it)
+EXPOSE 8000
+
+# Default command to run when the container starts
+CMD ["python3", "app.py"]
+```
+
+This approach has several benefits:
+
+- **Smaller image ize** - Temporary files and cache data created during intermediate steps are removed before a new layer is committed.
+- **Faster build time** - Docker caches layers, and fewer layers mean fewer steps for Docker to process.
+- **Improved efficiency** - Reduces duplication and ensures that cleanup happens in the same layer, keeping the image lean.
+
+### Optimizing the use of COPY and ADD instructions
+
+The ```COPY``` and ```ADD``` instructions are used to transfer files from your local filesystem to the [Docker](https://www.docker.com/) image. Each use of these commands creates a new layer, so optimizing how you transfer files can significantly reduce image size and improve efficiency.
+
+While ```COPY``` and ```ADD``` share similar functionality in [Docker](https://www.docker.com/), as both copy files or directories from the local system into a [Docker](https://www.docker.com/) image, there are key differences between them.
+
+The ```COPY``` command is straightforward—it simply transfers files or directories from your local environment to the [Docker](https://www.docker.com/) image without any additional features. 
+
+Here's a basic _Dockerfile_ using the ```COPY``` instruction:
+
+```dockerfile
+# Use a minimal base image
+FROM alpine:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy local files to the container
+COPY . /app
+
+# Run a command (example: starting a script)
+CMD ["sh", "start.sh"]
+
+```
+
+In contrast, ```ADD``` offers extra capabilities: it can automatically extract compressed files (e.g., .tar.gz archives) and fetch files from remote URLs. These additional features can be useful but may also introduce complexity and unintended behavior if not carefully managed.
+
+According to [Docker's official documentation](https://docs.docker.com/build/building/best-practices/#add-or-copy), it is recommended to use ```COPY``` instead of ```ADD``` due to its simplicity and transparency. The ```ADD``` command should only be used when you specifically need to extract a local compressed file.
+
+Here's a basic _Dockerfile_ using the ```ADD``` instruction:
+
+```dockerfile
+# Use a base image
+FROM alpine:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Add a local archive and extract it automatically
+ADD files.tar.gz /app/
+
+# Run a command (example: listing directory contents)
+CMD ["ls", "-l", "/app"]
+```
+
+For downloading remote files, combining the ```RUN``` instruction with tools like _wget_ or _curl_ is considered safer and more efficient and  prevents the creation of unnecessary image layers and helps reduce the final image size.
+
+The following example demonstrates how to use the ```RUN``` instruction to download a compressed package from a URL, extract its contents, and remove the archive to keep the image clean:
+
+```dockerfile
+# Use a base image
+FROM alpine:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Install wget, download, extract the archive, and clean up in a single layer
+RUN apk update && apk add --no-cache wget tar && \
+    wget -O /tmp/files.tar.gz https://example.com/files.tar.gz && \
+    tar -xzf /tmp/files.tar.gz -C /app/ && \
+    rm -rf /tmp/files.tar.gz
+
+# Run a command (example: listing directory contents)
+CMD ["ls", "-l", "/app"]
+```
+
